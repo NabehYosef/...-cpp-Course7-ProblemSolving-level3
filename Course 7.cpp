@@ -1,4 +1,4 @@
-
+﻿
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -182,27 +182,134 @@ int SumofMatrix(int arr[3][3],int Row,int Column) {
 bool CheckMatrixEquality(int arr1[3][3],int arr2[3][3],short Row,short Column) {
 	return SumofMatrix(arr1, Row, Column) == SumofMatrix(arr2, Row, Column);
 }
+/*=====================================================*/
+/*=====================================================*/
+//#12/3 Check Matrix Typical
+bool CheckMatrixTypical(int arr1[3][3],int arr2[3][3],int Row,int Column) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr1[i][j]!=arr2[i][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+/*=====================================================*/
+/*=====================================================*/
+//#13/3 Check Identity Matrix (Identity : Diagonal Should be only 1)
+void FillMatrix0and1(int arr1[3][3], int Row, int Column) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			arr1[i][j] = RandomNumbers(0,1);
+		}
+	}
+}
+//MyCode: this solution only matrix 3x3 (it is not optimal ❌)
+bool IdentityMatrix(int arr[3][3],int Row,int Column) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr[i][j]==1 && arr[i+1][j+1]==1 && arr[i+2][j+2]==1) { 
+				return true;
+			}
+		}
+		return false;
+	}
+}
+//Code My Instructor : is Optimal✅
+bool IsIdentityMatrix(int arr[3][3], int Row, int Column) {
+	//check Diagonal elements are 1 and rest elements are 0
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			//check for diagonals element
+			if (i==j && arr[i][j]!=1) {
+				return false;
+			}
+			//check for rest element
+			else if (i != j && arr[i][j] != 0) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+/*=====================================================*/
+/*=====================================================*/
+//#14/3 Check Scalar Matrix (Scalar : the element in Diagonal Should be Equal)
+bool IsScalarMatrix(int arr[3][3], int Row, int Column) {
+	int firstdigitelements = arr[0][0];
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (i == j && arr[i][j] != firstdigitelements) {
+				return false;
+			}
+			else if (i != j && arr[i][j]!=0) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+/*=====================================================*/
+/*=====================================================*/
+//#15/3 Count Number in Matrix
+int CountNumberinMatrix(int arr[3][3],int Row,int Column , int Number) {
+	int CheckNumber = 0;
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Row; j++) {
+			if (arr[i][j]==Number) {
+				CheckNumber++;
+			}
+		}
+	}
+	return CheckNumber;
+}
+
+// /*=====================================================*/
+/*=====================================================*/
+//#16/3  Chech Sparse Matrix (Sparse : Zeros Count >any Numbers count)
+/* My Code :
+bool IsSparseMatrix(int arr[3][3],int Row,int Column) {
+	int CountZeros=0, CountNumbers=0;
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Row; j++) {
+			if (arr[i][j]==0) {
+				CountZeros++;
+			}
+			else {
+				CountNumbers++;
+			}
+		}
+	}
+	if (CountZeros > CountNumbers) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}*///Code My Instructor
+bool IsSparseMatrix(int arr[3][3], int Row, int Column) {
+	short MatrixSize = Row * Column;
+	return (CountNumberinMatrix(arr, 3, 3, 0)) >= ceil((float)(MatrixSize / 2));
+}
+// /*=====================================================*/
+/*=====================================================*/
 int main()
 {
 	srand((unsigned)time(NULL));
-	
-	int arr1[3][3],arr2[3][3];
+	int Number;
+	//int arr1[3][3],arr2[3][3];
 	int arr[3];
-	
-	FillMatrixFrom1to10(arr1,3,3);
-	FillMatrixFrom1to10(arr2,3,3);
-
+	int arr1[3][3] ;
+	FillMatrix0and1(arr1,3,3);
 	cout << "Matrix 1 : " << endl;
 	PrintMatrix(arr1, 3, 3);
-	cout << "Matrix 2 : " << endl;
-	PrintMatrix(arr1, 3, 3);
-	cout << "The Sum of Matrix 1 = " << SumofMatrix(arr1,3,3) << endl;
-	cout << "The Sum of Matrix 2 = " << SumofMatrix(arr2,3,3) << endl;
-	if (CheckMatrixEquality(arr1, arr2, 3, 3)) {
-		cout << "\nYES: both martices are equal.";
+	if (IsSparseMatrix(arr1,3,3)) {
+		cout << "Yes , it is sparse";
 	}
 	else {
-		cout << "\nNo: martices are NOT equal.";
+		cout << "No , it is not sparse";
 	}
 	system("pause>0");
 }
