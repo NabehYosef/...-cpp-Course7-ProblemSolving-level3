@@ -268,7 +268,7 @@ int CountNumberinMatrix(int arr[3][3],int Row,int Column , int Number) {
 
 // /*=====================================================*/
 /*=====================================================*/
-//#16/3  Chech Sparse Matrix (Sparse : Zeros Count >any Numbers count)
+//#16/3  Check Sparse Matrix (Sparse : Zeros Count >any Numbers count)
 /* My Code :
 bool IsSparseMatrix(int arr[3][3],int Row,int Column) {
 	int CountZeros=0, CountNumbers=0;
@@ -288,29 +288,240 @@ bool IsSparseMatrix(int arr[3][3],int Row,int Column) {
 	else {
 		return false;
 	}
-}*///Code My Instructor
+}*///Code My Instructor Check Sparse Matrix (Sparse : Zeros Count >any Numbers count)
 bool IsSparseMatrix(int arr[3][3], int Row, int Column) {
 	short MatrixSize = Row * Column;
-	return (CountNumberinMatrix(arr, 3, 3, 0)) >= ceil((float)(MatrixSize / 2));
+	return (CountNumberinMatrix(arr, 3, 3, 0)) >= ceil((float)(MatrixSize / 2));	
 }
 // /*=====================================================*/
 /*=====================================================*/
+//#17/3 Number Exists in Matrix 
+bool SearchForNumber(int arr[3][3], int Row, int Column, int Number) {
+	for (int i = 0; i < Row;i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr[i][j]==Number) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#18/3 Intersected Number in Matrces
+void IntersectedNumberInMatrices(int arr1[3][3], int arr2[3][3], int Row, int Column) {
+	int Number;
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			Number = arr1[i][j];
+			if (SearchForNumber(arr2, 3, 3, Number)) {
+				cout << setw(3) << Number << "	";
+			}
+		}
+	}
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#19/3 Min/Max Number in Matrces
+int MinNumber(int arr[3][3],int Row,int Column) {
+	int MinNum=arr[0][0];
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr[i][j]  < MinNum) {
+				MinNum = arr[i][j];
+			}
+		}
+	}
+	return MinNum;
+}
+int MaxNumber(int arr[3][3], int Row, int Column) {
+	int MaxNum = arr[0][0];
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr[i][j] > MaxNum) {
+				MaxNum = arr[i][j];
+			}
+		}
+	}
+	return MaxNum;
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#20/3 Palindrome Matrices
+bool IsPalidromeMatreces(int arr[3][3],int Row ,int Column) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Column; j++) {
+			if (arr[i][j] != arr[i][Column-1-j]) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#21/3 Fibonacci Series UsingLoop
+void PrintFebonacciUsingForLoop(int Number,int Prev1,int Prev2) {
+	int FebNumber = 0;
+	for (int i = 0; i < Number;i++) {
+		FebNumber = Prev1 + Prev2;
+		Prev1 = Prev2;
+		Prev2 = FebNumber;
+		cout << FebNumber << "	";
+	}
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#22/3 Fibonacci Series with Recursion
+void PrintFebonacciUsingRecursion(int Number ,int Prev1 ,int Prev2) {
+	int FebNumber = 0;
+	if (Number>0) {
+		FebNumber = Prev1 + Prev2;
+		Prev2 = Prev1;
+		Prev1 = FebNumber;
+		cout << FebNumber << "	";
+		PrintFebonacciUsingRecursion(Number-1,Prev1,Prev2);
+	}
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#23/3 Print First Letter of Each Word
+string ReadString() {
+	string S1;
+	cout << "\nPlease Enter Your String :\n";
+	getline(cin,S1);
+	return S1;
+}
+void PrintFirstNumberofEachWord(string S1) {
+	bool isFirsNumber=true;
+	for (int i = 0; i < S1.length();i++) {
+		if (S1[i] != ' ' && isFirsNumber) {
+			cout << S1[i] << endl;
+		}
+		isFirsNumber = (S1[i] == ' ' ? true : false);
+	}
+}
+// /*=====================================================*/
+/*=====================================================*/
+//#24/3 Upper First Letter of Each Word
+string UpperFirstLetterofEachWord(string S1) {
+	bool isFirstLetter=true;
+	for (int i = 0; i < S1.length();i++) {
+		if(S1[i] != ' ' && isFirstLetter) {
+			S1[i] = toupper(S1[i]);
+		}
+		isFirstLetter = (S1[i]==' '?true : false);
+	}
+	return S1;
+}
+///*=====================================================*/
+/*=====================================================*/
+//#25/3 Lower First Letter of Each Word
+string LowerFirstLetterofEachWord(string S1) {
+	bool isFirstLetter = true;
+	for (int i = 0; i < S1.length();i++) {
+		if (S1[i]!=' '&&isFirstLetter) {
+			S1[i] = tolower(S1[i]);
+		}
+		isFirstLetter = (S1[i]==' '?true:false);
+	}
+	return S1;
+}
+///*=====================================================*/
+/*=====================================================*/
+//#26/3 Upper/Lower All Letters of a String
+string UpperAllString(string S1) {
+	for (int i = 0; i < S1.length();i++) {
+		S1[i] = toupper(S1[i]);
+	}
+	return S1;
+}
+string LowerAllstring(string S1) {
+	for (int i = 0; i < S1.length();i++) {
+		S1[i] = tolower(S1[i]);
+	}
+	return S1;
+}
+///*=====================================================*/
+/*=====================================================*/
+//#27/3 Invert Charcter Case 
+char ReadChar() {
+	char Ch1;
+	cout << "Please Enter Your Char :\n";
+	cin >> Ch1;
+	return Ch1;
+}
+char InvertedLetterCase(char Ch1) {
+	return isupper(Ch1) ? tolower(Ch1) : toupper(Ch1);
+}
+///*=====================================================*/
+/*=====================================================*/
+//#28/3 Invert All Letter Case
+string InvertedAllLetterCase(string S1) {
+	for (int i = 0; i < S1.length();i++) {
+		S1[i] = InvertedLetterCase(S1[i]);
+	}
+	return S1;
+}
+///*=====================================================*/
+/*=====================================================*/
+//Enum Method
+enum enWhatToCount  {SmallLetters=0,CapitalLetters=1,All=2};
+
+short CountLetters(string S1,enWhatToCount WhattoCount=enWhatToCount::All) {
+	short Counter = 0; 
+	if (WhattoCount==enWhatToCount::All) {
+		return S1.length();
+	}
+	for (int i = 0; i < S1.length(); i++) {
+		if (WhattoCount==enWhatToCount::CapitalLetters&&isupper(S1[i])) {
+			Counter++;
+		}
+		if(WhattoCount==enWhatToCount::SmallLetters&&islower(S1[i])) {
+			Counter++;
+		}
+	}
+}
+/*=====================================================*/
+//#29/3 Count Small/Capital Letters
+int CountCapitalLetters(string S1) {
+	int CountCapitalLetters=0;
+	for (int i = 0; i < S1.length();i++) {
+		if (isupper(S1[i])) {
+			CountCapitalLetters++;
+		}
+	}
+	return CountCapitalLetters;
+}
+int CountSmallLetters(string S1) {
+	int CountSmallLetters = 0;
+	for (int i = 0; i < S1.length(); i++) {
+		if (islower(S1[i])) {
+			CountSmallLetters++;
+		}
+	}
+	return CountSmallLetters;
+}
+///*=====================================================*/
+/*=====================================================*/
+//#30/3 Count Letters
+int CountLetter(string S1,char letter) {
+	int count = 0;
+	for (short i = 0; i < S1.length();i++) {
+		if (S1[i]==letter) {
+			count++;
+		}
+	}
+	return count;
+}
 int main()
 {
-	srand((unsigned)time(NULL));
-	int Number;
-	//int arr1[3][3],arr2[3][3];
-	int arr[3];
-	int arr1[3][3] ;
-	FillMatrix0and1(arr1,3,3);
-	cout << "Matrix 1 : " << endl;
-	PrintMatrix(arr1, 3, 3);
-	if (IsSparseMatrix(arr1,3,3)) {
-		cout << "Yes , it is sparse";
-	}
-	else {
-		cout << "No , it is not sparse";
-	}
+	//srand((unsigned)time(NULL));
+	string S1=ReadString();
+	char c = ReadChar();
+	cout << "\n Letter " << c << "\n Count = " << CountLetter(S1,c);
+		
+
 	system("pause>0");
 }
 	
