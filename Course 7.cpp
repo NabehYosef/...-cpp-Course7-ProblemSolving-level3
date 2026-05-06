@@ -348,10 +348,10 @@ int MaxNumber(int arr[3][3], int Row, int Column) {
 // /*=====================================================*/
 /*=====================================================*/
 //#20/3 Palindrome Matrices
-bool IsPalidromeMatreces(int arr[3][3],int Row ,int Column) {
+bool IsPalidromeMatreces(int arr[3][3], int Row, int Column) {
 	for (int i = 0; i < Row; i++) {
 		for (int j = 0; j < Column; j++) {
-			if (arr[i][j] != arr[i][Column-1-j]) {
+			if (arr[i][j] != arr[i][Column - 1 - j]) {
 				return true;
 			}
 		}
@@ -361,9 +361,9 @@ bool IsPalidromeMatreces(int arr[3][3],int Row ,int Column) {
 // /*=====================================================*/
 /*=====================================================*/
 //#21/3 Fibonacci Series UsingLoop
-void PrintFebonacciUsingForLoop(int Number,int Prev1,int Prev2) {
+void PrintFebonacciUsingForLoop(int Number, int Prev1, int Prev2) {
 	int FebNumber = 0;
-	for (int i = 0; i < Number;i++) {
+	for (int i = 0; i < Number; i++) {
 		FebNumber = Prev1 + Prev2;
 		Prev1 = Prev2;
 		Prev2 = FebNumber;
@@ -373,14 +373,14 @@ void PrintFebonacciUsingForLoop(int Number,int Prev1,int Prev2) {
 // /*=====================================================*/
 /*=====================================================*/
 //#22/3 Fibonacci Series with Recursion
-void PrintFebonacciUsingRecursion(int Number ,int Prev1 ,int Prev2) {
+void PrintFebonacciUsingRecursion(int Number, int Prev1, int Prev2) {
 	int FebNumber = 0;
-	if (Number>0) {
+	if (Number > 0) {
 		FebNumber = Prev1 + Prev2;
 		Prev2 = Prev1;
 		Prev1 = FebNumber;
 		cout << FebNumber << "	";
-		PrintFebonacciUsingRecursion(Number-1,Prev1,Prev2);
+		PrintFebonacciUsingRecursion(Number - 1, Prev1, Prev2);
 	}
 }
 // /*=====================================================*/
@@ -389,12 +389,12 @@ void PrintFebonacciUsingRecursion(int Number ,int Prev1 ,int Prev2) {
 string ReadString() {
 	string S1;
 	cout << "\nPlease Enter Your String :\n";
-	getline(cin,S1);
+	getline(cin, S1);
 	return S1;
 }
 void PrintFirstNumberofEachWord(string S1) {
-	bool isFirsNumber=true;
-	for (int i = 0; i < S1.length();i++) {
+	bool isFirsNumber = true;
+	for (int i = 0; i < S1.length(); i++) {
 		if (S1[i] != ' ' && isFirsNumber) {
 			cout << S1[i] << endl;
 		}
@@ -405,12 +405,12 @@ void PrintFirstNumberofEachWord(string S1) {
 /*=====================================================*/
 //#24/3 Upper First Letter of Each Word
 string UpperFirstLetterofEachWord(string S1) {
-	bool isFirstLetter=true;
-	for (int i = 0; i < S1.length();i++) {
-		if(S1[i] != ' ' && isFirstLetter) {
+	bool isFirstLetter = true;
+	for (int i = 0; i < S1.length(); i++) {
+		if (S1[i] != ' ' && isFirstLetter) {
 			S1[i] = toupper(S1[i]);
 		}
-		isFirstLetter = (S1[i]==' '?true : false);
+		isFirstLetter = (S1[i] == ' ' ? true : false);
 	}
 	return S1;
 }
@@ -419,11 +419,11 @@ string UpperFirstLetterofEachWord(string S1) {
 //#25/3 Lower First Letter of Each Word
 string LowerFirstLetterofEachWord(string S1) {
 	bool isFirstLetter = true;
-	for (int i = 0; i < S1.length();i++) {
-		if (S1[i]!=' '&&isFirstLetter) {
+	for (int i = 0; i < S1.length(); i++) {
+		if (S1[i] != ' ' && isFirstLetter) {
 			S1[i] = tolower(S1[i]);
 		}
-		isFirstLetter = (S1[i]==' '?true:false);
+		isFirstLetter = (S1[i] == ' ' ? true : false);
 	}
 	return S1;
 }
@@ -431,13 +431,13 @@ string LowerFirstLetterofEachWord(string S1) {
 /*=====================================================*/
 //#26/3 Upper/Lower All Letters of a String
 string UpperAllString(string S1) {
-	for (int i = 0; i < S1.length();i++) {
+	for (int i = 0; i < S1.length(); i++) {
 		S1[i] = toupper(S1[i]);
 	}
 	return S1;
 }
 string LowerAllstring(string S1) {
-	for (int i = 0; i < S1.length();i++) {
+	for (int i = 0; i < S1.length(); i++) {
 		S1[i] = tolower(S1[i]);
 	}
 	return S1;
@@ -458,7 +458,7 @@ char InvertedLetterCase(char Ch1) {
 /*=====================================================*/
 //#28/3 Invert All Letter Case
 string InvertedAllLetterCase(string S1) {
-	for (int i = 0; i < S1.length();i++) {
+	for (int i = 0; i < S1.length(); i++) {
 		S1[i] = InvertedLetterCase(S1[i]);
 	}
 	return S1;
@@ -466,18 +466,18 @@ string InvertedAllLetterCase(string S1) {
 ///*=====================================================*/
 /*=====================================================*/
 //Enum Method
-enum enWhatToCount  {SmallLetters=0,CapitalLetters=1,All=2};
+enum enWhatToCount { SmallLetters = 0, CapitalLetters = 1, All = 2 };
 
-short CountLetters(string S1,enWhatToCount WhattoCount=enWhatToCount::All) {
-	short Counter = 0; 
-	if (WhattoCount==enWhatToCount::All) {
+short CountLetters(string S1, enWhatToCount WhattoCount = enWhatToCount::All) {
+	short Counter = 0;
+	if (WhattoCount == enWhatToCount::All) {
 		return S1.length();
 	}
 	for (int i = 0; i < S1.length(); i++) {
-		if (WhattoCount==enWhatToCount::CapitalLetters&&isupper(S1[i])) {
+		if (WhattoCount == enWhatToCount::CapitalLetters && isupper(S1[i])) {
 			Counter++;
 		}
-		if(WhattoCount==enWhatToCount::SmallLetters&&islower(S1[i])) {
+		if (WhattoCount == enWhatToCount::SmallLetters && islower(S1[i])) {
 			Counter++;
 		}
 	}
@@ -485,8 +485,8 @@ short CountLetters(string S1,enWhatToCount WhattoCount=enWhatToCount::All) {
 /*=====================================================*/
 //#29/3 Count Small/Capital Letters
 int CountCapitalLetters(string S1) {
-	int CountCapitalLetters=0;
-	for (int i = 0; i < S1.length();i++) {
+	int CountCapitalLetters = 0;
+	for (int i = 0; i < S1.length(); i++) {
 		if (isupper(S1[i])) {
 			CountCapitalLetters++;
 		}
@@ -505,21 +505,99 @@ int CountSmallLetters(string S1) {
 ///*=====================================================*/
 /*=====================================================*/
 //#30/3 Count Letters
-int CountLetter(string S1,char letter) {
+int CountLetter(string S1, char letter) {
 	int count = 0;
-	for (short i = 0; i < S1.length();i++) {
-		if (S1[i]==letter) {
+	for (short i = 0; i < S1.length(); i++) {
+		if (S1[i] == letter) {
 			count++;
 		}
 	}
 	return count;
 }
+///*=====================================================*/
+/*=====================================================*/
+//#31/3 Count Letter (Match Case)
+short CountLetter(string S,char letter,bool MatchCase=true) {
+	int counter = 0;
+	for (int i = 0; i < S.length();i++) {
+		if (MatchCase) {
+			if (S[i]==letter) {
+				counter++;
+			}
+			else {
+				if (tolower(S[i]==tolower(letter))) {
+					counter++;
+				}
+			}
+		}
+	}
+	return counter;
+}
+///*=====================================================*/
+/*=====================================================*/
+//32/3 Is Vowel ?
+bool isVowel(char Ch1) {
+	Ch1 = tolower(Ch1);
+	return ((Ch1 == 'a') ||
+		(Ch1 == 'o') || (Ch1 == 'e') || (Ch1 == 'u') || (Ch1 == 'i'));
+}
+///*==================================================*/
+/*=====================================================*/
+//33/3 Count Vowel
+int CountVowel(string S ) {
+	int counter = 0;
+	for (int i = 0; i < S.length(); i++) {
+		if (isVowel(S[i])) {
+			counter++;
+		}
+	}
+	return counter;
+}
+///*=====================================================*/
+/*=====================================================*/
+//34/3 print all vowel in string 
+void PrintAllVowels(string S) {
+	for (int i = 0; i < S.length(); i++) {
+		if (isVowel(S[i])) {
+			cout << S[i] << "	";
+		}
+	}
+}
+///*=====================================================*/
+/*=====================================================*/
+//35/3 print Each word in string
+void printEachWord(string S) {
+	string word;
+	for (int i = 0; i < S.length(); i++) {
+		word += S[i];
+		if (S[i]==' ') {
+			cout << word << endl;
+			word = "";
+		}
+	}
+}
+///*=====================================================*/
+/*=====================================================*/
+//36/Count Each word in string
+///*=====================================================*/
+/*=====================================================*/
+//37/3
+///*=====================================================*/
+/*=====================================================*/
+//38/3
+///*=====================================================*/
+/*=====================================================*/
+//39/3
+///*=====================================================*/
+/*=====================================================*/
+//40/3
+
 int main()
 {
 	//srand((unsigned)time(NULL));
-	string S1=ReadString();
-	char c = ReadChar();
-	cout << "\n Letter " << c << "\n Count = " << CountLetter(S1,c);
+	string S1 = ReadString();
+	printEachWord(S1);
+
 		
 
 	system("pause>0");
