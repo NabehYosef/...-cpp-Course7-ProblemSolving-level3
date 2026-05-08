@@ -566,6 +566,7 @@ void PrintAllVowels(string S) {
 ///*=====================================================*/
 /*=====================================================*/
 //35/3 print Each word in string
+//My Solution
 void printEachWord(string S) {
 	string word;
 	for (int i = 0; i < S.length(); i++) {
@@ -576,12 +577,47 @@ void printEachWord(string S) {
 		}
 	}
 }
+//===========================
+//Optimal Solution
+void PrintEachWordInString(string S1) {
+	string delim = " ";
+	short pos;
+	string word;
+	cout << "\nYour Strings Word are : \n\n";
+	while ((pos=S1.find(" "))!=std::string::npos) {
+		word = S1.substr(0,pos);
+		if (word != " ") {
+			cout << word << endl;
+		}
+		S1.erase(0,pos+delim.length());
+	}
+	if (S1!=" ") {
+		cout << S1 << endl;
+	}
+}
 ///*=====================================================*/
 /*=====================================================*/
 //36/Count Each word in string
+short CountWords(string S1) {
+	string delim = " ";
+	short pos;
+	short counter=0;
+	string word;
+	while ((pos = S1.find(" ")) != std::string::npos) {
+		word = S1.substr(0, pos);
+		if (word != " ") {
+			counter++;
+		}
+		S1.erase(0, pos + delim.length());
+	}
+	if (S1 != " ") {
+		counter++;
+	}
+	return counter++;
+}
 ///*=====================================================*/
 /*=====================================================*/
-//37/3
+//37/3 split string 
 ///*=====================================================*/
 /*=====================================================*/
 //38/3
@@ -596,7 +632,7 @@ int main()
 {
 	//srand((unsigned)time(NULL));
 	string S1 = ReadString();
-	printEachWord(S1);
+	cout << "Your Counter Word is : " << CountWords(S1) << endl;
 
 		
 
