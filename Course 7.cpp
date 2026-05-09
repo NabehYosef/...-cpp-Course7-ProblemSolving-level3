@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 
@@ -581,17 +582,16 @@ void printEachWord(string S) {
 //Optimal Solution
 void PrintEachWordInString(string S1) {
 	string delim = " ";
-	short pos;
 	string word;
-	cout << "\nYour Strings Word are : \n\n";
-	while ((pos=S1.find(" "))!=std::string::npos) {
+	short pos;
+	while ((pos = S1.find(" ")) != std::string::npos) {
 		word = S1.substr(0,pos);
-		if (word != " ") {
+		if(word != " ") {
 			cout << word << endl;
 		}
 		S1.erase(0,pos+delim.length());
 	}
-	if (S1!=" ") {
+	if (S1 != " ") {
 		cout << S1 << endl;
 	}
 }
@@ -618,12 +618,47 @@ short CountWords(string S1) {
 ///*=====================================================*/
 /*=====================================================*/
 //37/3 split string 
+vector<string> SplitString(string S1, string delim) {
+	vector <string> vString;
+	short pos;
+	string sWord;
+	while ((pos = S1.find(delim)) != std::string::npos) {
+		sWord = S1.substr(0, pos);
+		if (sWord != " ") {
+			vString.push_back(sWord);
+		}
+		S1.erase(0, pos + delim.length());
+	}
+	if (S1 != " ") {
+		vString.push_back(S1);
+	}
+	return vString;
+}
 ///*=====================================================*/
 /*=====================================================*/
-//38/3
+//38/3 TrimLeft , TrimRight , Trim
+string TrimLeft(string S1) {
+	for (int i = 0; i < S1.length();i++) {
+		if (S1[i] != ' ') {
+			return S1.substr(i,S1.length()-i);
+		}
+	}
+	return "";
+}
+string TrimRight(string S1) {
+	for (int i = S1.length() - 1; i << S1.length() >= 0 ; i--) {
+		if (S1[i] != ' ') {
+			return S1.substr(0,i+1);
+		}
+	}
+	return " ";
+}
+string Trim(string S1) {
+	return TrimLeft(TrimRight(S1));
+}
 ///*=====================================================*/
 /*=====================================================*/
-//39/3
+//39/3 Join string
 ///*=====================================================*/
 /*=====================================================*/
 //40/3
@@ -631,9 +666,13 @@ short CountWords(string S1) {
 int main()
 {
 	//srand((unsigned)time(NULL));
-	string S1 = ReadString();
-	cout << "Your Counter Word is : " << CountWords(S1) << endl;
-
+	vector<string> vString;
+	string s2 = "Nabeh,Ali,mhmd,nezar";
+	vString=SplitString(s2, ",");
+	cout << "Tokens = " << vString.size() << endl;
+	for (string &s2 : vString) {
+		cout << s2 << endl;
+	}
 		
 
 	system("pause>0");
