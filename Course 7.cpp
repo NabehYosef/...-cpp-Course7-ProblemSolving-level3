@@ -581,17 +581,17 @@ void printEachWord(string S) {
 //===========================
 //Optimal Solution
 void PrintEachWordInString(string S1) {
+	string sWord; 
 	string delim = " ";
-	string word;
-	short pos;
+	short pos=0;
 	while ((pos = S1.find(" ")) != std::string::npos) {
-		word = S1.substr(0,pos);
-		if(word != " ") {
-			cout << word << endl;
+		sWord = S1.substr(0,pos);
+		if (sWord!="") {
+			cout << sWord << endl;
 		}
 		S1.erase(0,pos+delim.length());
 	}
-	if (S1 != " ") {
+	if (S1 != "") {
 		cout << S1 << endl;
 	}
 }
@@ -599,37 +599,37 @@ void PrintEachWordInString(string S1) {
 /*=====================================================*/
 //36/Count Each word in string
 short CountWords(string S1) {
+	short counter = 0;
+	short pos = 0;
+	string sWord;
 	string delim = " ";
-	short pos;
-	short counter=0;
-	string word;
 	while ((pos = S1.find(" ")) != std::string::npos) {
-		word = S1.substr(0, pos);
-		if (word != " ") {
+		sWord = S1.substr(0, pos);
+		if (sWord!="") {
 			counter++;
 		}
-		S1.erase(0, pos + delim.length());
+		S1.erase(0,pos+delim.length());
 	}
-	if (S1 != " ") {
+	if (S1 != "") {
 		counter++;
 	}
-	return counter++;
+	return counter;
 }
 ///*=====================================================*/
 /*=====================================================*/
 //37/3 split string 
-vector<string> SplitString(string S1, string delim) {
-	vector <string> vString;
-	short pos;
+vector <string> SplitString(string S1,string delim ) {
+	vector<string>vString;
 	string sWord;
-	while ((pos = S1.find(delim)) != std::string::npos) {
-		sWord = S1.substr(0, pos);
-		if (sWord != " ") {
+	short pos=0;
+	while ((pos=S1.find(delim))!=std::string::npos) {
+		sWord = S1.substr(0,pos);
+		if (sWord!="") {
 			vString.push_back(sWord);
 		}
 		S1.erase(0, pos + delim.length());
 	}
-	if (S1 != " ") {
+	if (S1 != "") {
 		vString.push_back(S1);
 	}
 	return vString;
@@ -639,19 +639,19 @@ vector<string> SplitString(string S1, string delim) {
 //38/3 TrimLeft , TrimRight , Trim
 string TrimLeft(string S1) {
 	for (int i = 0; i < S1.length();i++) {
-		if (S1[i] != ' ') {
-			return S1.substr(i,S1.length()-i);
+		if (S1[i]!=' ') {
+			return	S1.substr(i, S1.length() - 1);
 		}
 	}
 	return "";
 }
 string TrimRight(string S1) {
-	for (int i = S1.length() - 1; i << S1.length() >= 0 ; i--) {
-		if (S1[i] != ' ') {
+	for (int i = S1.length()-1 ; i >= 0;i--) {
+		if (S1[i]!=' ') {
 			return S1.substr(0,i+1);
 		}
 	}
-	return " ";
+	return "";
 }
 string Trim(string S1) {
 	return TrimLeft(TrimRight(S1));
@@ -659,20 +659,38 @@ string Trim(string S1) {
 ///*=====================================================*/
 /*=====================================================*/
 //39/3 Join string
+string JoinString(vector<string> vString, string Delim) {
+	string S1 = "";
+	for (string &s : vString) {
+		S1 = S1 + s + Delim;
+	}
+	return S1.substr(0,S1.length()-Delim.length());
+}
+
 ///*=====================================================*/
 /*=====================================================*/
-//40/3
+//40/3 Join String (OverLoading)
+string JoinString(string arrString[],int length , string Delim) {
+	string S1 = " ";
+	for (int i = 0; i < length;i++) {
+		S1 += arrString[i] + Delim;
+	}
+	return S1.substr(0,S1.length()-Delim.length());
+}
+///*=====================================================*/
+/*=====================================================*/
+//41/3 Reverse Word
 
 int main()
 {
 	//srand((unsigned)time(NULL));
-	vector<string> vString;
-	string s2 = "Nabeh,Ali,mhmd,nezar";
-	vString=SplitString(s2, ",");
-	cout << "Tokens = " << vString.size() << endl;
-	for (string &s2 : vString) {
-		cout << s2 << endl;
-	}
+	vector<string> vString = { "Mohammed","Faid","Ali","Maher" };
+	string arrString[] = { "Mohammed","Faid","Ali","Maher" };
+	cout << "\nVector after join: \n";
+	cout << JoinString(vString, " ");
+	cout << "\n\nArray after join: \n";
+	cout << JoinString(arrString, 4, " ");
+	
 		
 
 	system("pause>0");
