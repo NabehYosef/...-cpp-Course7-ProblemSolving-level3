@@ -567,18 +567,6 @@ void PrintAllVowels(string S) {
 ///*=====================================================*/
 /*=====================================================*/
 //35/3 print Each word in string
-//My Solution
-void printEachWord(string S) {
-	string word;
-	for (int i = 0; i < S.length(); i++) {
-		word += S[i];
-		if (S[i]==' ') {
-			cout << word << endl;
-			word = "";
-		}
-	}
-}
-//===========================
 //Optimal Solution
 void PrintEachWordInString(string S1) {
 	string sWord; 
@@ -654,77 +642,71 @@ string TrimRight(string S1) {
 	return "";
 }
 string Trim(string S1) {
-	return TrimLeft(TrimRight(S1));
+	return (TrimLeft(TrimRight(S1)));
 }
 ///*=====================================================*/
 /*=====================================================*/
 //39/3 Join string
-string JoinString(vector<string> vString, string Delim) {
+string JoinString(vector<string> vString,string Delim) {
 	string S1 = "";
-	for (string &s : vString) {
-		S1 = S1 + s + Delim;
+	for (string &newS :vString ) {	
+		S1 = S1 + newS + Delim;
 	}
 	return S1.substr(0,S1.length()-Delim.length());
 }
-
-///*=====================================================*/
-/*=====================================================*/
 //40/3 Join String (OverLoading)
 string JoinString(string arrString[],int length , string Delim) {
-	string S1 = " ";
+	string S1 = "";
 	for (int i = 0; i < length;i++) {
-		S1 += arrString[i] + Delim;
+		S1 += arrString[i] + Delim; 
 	}
 	return S1.substr(0,S1.length()-Delim.length());
 }
 ///*=====================================================*/
 /*=====================================================*/
 //41/3 Reverse Word
-
+string ReverseWord(string S1) {
+	vector<string>vString;
+	vString = SplitString(S1 ," ");
+	string S2;
+	vector<string>::iterator iter = vString.end();
+	while (iter != vString.begin()) {
+		--iter;
+		S2 += *iter + " ";
+	}
+	S2 = S2.substr(0,S2.length()-1);
+	return S2;
+}
+///*=====================================================*/
+/*=====================================================*/
+//42/3 Replace Word
+string ReplaceWordStringUsingBuildInFunction(string S,string SToReplace,string ReplaceTo) {
+	short pos = S.find(SToReplace);
+	while (pos != std::string::npos) {
+		S = S.replace(pos,SToReplace.length(),ReplaceTo);
+		pos = S.find(SToReplace);
+	}
+	return S;
+}
+///*=====================================================*/
+/*=====================================================*/
+//43/3 Replace Word (Custom)
+string ReplaceWordStringUsingCustomFunction(string S,string StoReplace ,string ReplaceTo,bool matchcase=true) {
+	
+}
 int main()
 {
 	//srand((unsigned)time(NULL));
-	vector<string> vString = { "Mohammed","Faid","Ali","Maher" };
-	string arrString[] = { "Mohammed","Faid","Ali","Maher" };
-	cout << "\nVector after join: \n";
-	cout << JoinString(vString, " ");
-	cout << "\n\nArray after join: \n";
-	cout << JoinString(arrString, 4, " ");
+	//vector<string> vString = { "Mohammed","Faid","Ali","Maher" };
+	//string arrString[] = { "Mohammed","Faid","Ali","Maher" };
+	string S = "Welcome to syria , syria is a nice country";
+	string SToReplace = "syria";
+	string ReplaceTo = "Jordan";
+	cout << S << endl;
+	cout << "After Change :" << endl;
+	cout << ReplaceWordStringUsingBuildInFunction(S,SToReplace,ReplaceTo) << endl;
+
 	
-		
 
 	system("pause>0");
 }
-	
-		
-
-
-
-	/*
-	FillMatrixOrderedNumber(arr1,3,3);
-	cout << "The Following is a 3x3 Ordered Matrix : " << endl;
-	PrintMatrixOrdered(arr1,3,3);
-	cout << "The Following is a Transpose Matrix : " << endl;
-	TransposeMatrix(arr1,arrTranspose,3,3);
-	PrintTransposeMatrix(arrTranspose,3,3);
-	*/
-	
-
-	/*
-	cout << "The Matrix 3x3 after Sum Rows:" << endl;
-
-	PrintSumofRows(arrTranspose,3,3);
-	cout << "======== Sum of Row in Single Array : ==========: " << endl;
-	SumMatrixRowinArray(arr,arrTranspose,3,3);
-	PrintRowsSumArray(arr, 3);
-	cout << "======== Sum of Column : ==========" << endl;
-	PrintSumOfColumn(arrTranspose,3,3);
-	cout << "======== Sum of Column in Single Array : ==========" << endl;
-	ColumnSumArray(arrTranspose,arr,3,3);
-	PrintColumnSumArray(arr,3);*/
-
-
-	
-
-
-
