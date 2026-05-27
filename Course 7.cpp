@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 
@@ -353,11 +354,11 @@ bool IsPalidromeMatreces(int arr[3][3], int Row, int Column) {
 	for (int i = 0; i < Row; i++) {
 		for (int j = 0; j < Column; j++) {
 			if (arr[i][j] != arr[i][Column - 1 - j]) {
-				return true;
+				return false;
 			}
 		}
 	}
-	return false;
+	return true;
 }
 // /*=====================================================*/
 /*=====================================================*/
@@ -393,13 +394,14 @@ string ReadString() {
 	getline(cin, S1);
 	return S1;
 }
-void PrintFirstNumberofEachWord(string S1) {
-	bool isFirsNumber = true;
-	for (int i = 0; i < S1.length(); i++) {
-		if (S1[i] != ' ' && isFirsNumber) {
+
+void PrintFirstLetterofString(string S1) {
+	bool isFirstLetter = true;
+	for (int i = 0; i <= S1.length();i++) {
+		if (S1[i]!=' '&&isFirstLetter) {
 			cout << S1[i] << endl;
 		}
-		isFirsNumber = (S1[i] == ' ' ? true : false);
+		isFirstLetter = (S1[i]!=' ' ? true : false);
 	}
 }
 // /*=====================================================*/
@@ -627,7 +629,7 @@ vector <string> SplitString(string S1,string delim ) {
 //38/3 TrimLeft , TrimRight , Trim
 string TrimLeft(string S1) {
 	for (int i = 0; i < S1.length();i++) {
-		if (S1[i]!=' ') {
+		if (S1[i]!=' ') {	
 			return	S1.substr(i, S1.length() - 1);
 		}
 	}
@@ -665,48 +667,159 @@ string JoinString(string arrString[],int length , string Delim) {
 ///*=====================================================*/
 /*=====================================================*/
 //41/3 Reverse Word
-string ReverseWord(string S1) {
+string ReverseWord(string S1,string Delim) {
 	vector<string>vString;
-	vString = SplitString(S1 ," ");
-	string S2;
-	vector<string>::iterator iter = vString.end();
-	while (iter != vString.begin()) {
+	string word;
+	vString = SplitString(S1," ");
+	vector <string>::iterator iter = vString.end();
+
+	while (iter!=vString.begin()) {
 		--iter;
-		S2 += *iter + " ";
+		word += *iter + " ";
 	}
-	S2 = S2.substr(0,S2.length()-1);
-	return S2;
+	return word.substr(0,word.length()-1);
 }
 ///*=====================================================*/
 /*=====================================================*/
 //42/3 Replace Word
-string ReplaceWordStringUsingBuildInFunction(string S,string SToReplace,string ReplaceTo) {
-	short pos = S.find(SToReplace);
+string ReplaceWordInStringUsingBuildInFunction(string S1,string StringToReplace,string sReplaceTo) {
+	short pos = S1.find(StringToReplace);
+
 	while (pos != std::string::npos) {
-		S = S.replace(pos,SToReplace.length(),ReplaceTo);
-		pos = S.find(SToReplace);
+		S1 = S1.replace(pos, StringToReplace.length(), sReplaceTo);
+		pos=S1.find(StringToReplace);
 	}
-	return S;
+	return S1;
 }
 ///*=====================================================*/
 /*=====================================================*/
 //43/3 Replace Word (Custom)
-string ReplaceWordStringUsingCustomFunction(string S,string StoReplace ,string ReplaceTo,bool matchcase=true) {
-	
+string ReplaceWordInStringUsingSplit(string S1, string
+	StringToReplace, string sRepalceTo, bool MatchCase = true)
+{
+	vector<string> vString = SplitString(S1, " ");
+	for (string& s : vString)
+	{
+		if (MatchCase)
+		{
+			if (s == StringToReplace)
+			{
+				s = sRepalceTo;
+			}
+		}
+		else
+		{
+			if (LowerAllstring(s) ==
+				LowerAllstring(StringToReplace))
+			{
+				s = sRepalceTo;
+			}
+		}
+	}
+	return JoinString(vString, " ");
 }
+///*=====================================================*/
+/*=====================================================*/
+//44/3 Remove Punctuations 
+string RemovePanctuationsFromString(string S1) {
+	string S2 = " ";
+	for (int i = 0; i < S1.length(); i++) {
+		if (!ispunct(S1[i])) {
+			S2 += S1[i];	
+		}
+	}
+	return S2;
+}
+///*=====================================================*/
+/*=====================================================*/
+//45/3 Convert Record To line 
+struct stClints {
+	string AccountNumber;
+	string PinCode;
+	string Name;
+	string Phone;
+	double AccountBalance;
+};
+stClints ReadNewClient() {
+	stClints Clint;
+	cout << "Enter Accont Number : ";
+	getline(cin>>ws,Clint.AccountNumber);
+	cout << "Enter Your PinCode : ";
+	getline(cin,Clint.PinCode);
+	cout << "Enter Your Name : ";
+	getline(cin,Clint.Name);
+	cout << "Enter Your Phone : ";
+	getline(cin, Clint.Phone);
+	cout << "Enter AccountBallace : ";
+	cin >> Clint.AccountBalance;
+	return Clint;
+}
+string ConvertRecordToLine(stClints Clint , string Seperator="#//#") {
+	string stClintRecord = "";
+	stClintRecord += Clint.AccountNumber + Seperator;
+	stClintRecord += Clint.PinCode + Seperator;
+	stClintRecord += Clint.Name + Seperator;
+	stClintRecord += Clint.Phone + Seperator;
+	stClintRecord += to_string(Clint.AccountBalance);
+	return stClintRecord;
+}
+///*=====================================================*/
+/*=====================================================*/
+//46/3 Convert Line Data to Record
+stClints ConvertLineToRecord(string Line, string Seperator="#//#") {
+	stClints Clint;
+	vector<string>vClintData;
+	vClintData = SplitString(Line,Seperator);
+
+	Clint.AccountNumber = vClintData[0];
+	Clint.PinCode = vClintData[1];
+	Clint.Name = vClintData[2];
+	Clint.Phone = vClintData[3];
+	Clint.AccountBalance = stod(vClintData[4]);
+}
+void PrintClientRecord(stClints Client)
+{
+	cout << "\n\nThe following is the extracted client record:\n";
+	cout << "\nAccout Number: " << Client.AccountNumber;
+	cout << "\nPin Code : " << Client.PinCode;
+	cout << "\nName : " << Client.Name;
+	cout << "\nPhone : " << Client.Phone;
+	cout << "\nAccount Balance: " << Client.AccountBalance;
+}
+///*=====================================================*/
+/*=====================================================*/
+//47/3 Add Clients To File
+void AddDataLineToFile(string FileName, string stDataline) {
+	fstream Myfile;
+	Myfile.open(FileName, ios::out | ios::app);
+	if (Myfile.is_open()) {
+		Myfile << stDataline << endl;
+		Myfile.close();
+	}
+}
+const string ClientsFileName = "Clients.txt";
+void AddNewClient() {
+	stClints Clint;
+	Clint = ReadNewClient();
+	AddDataLineToFile(ClientsFileName,ConvertRecordToLine(Clint));
+}
+void AddMoreClients() {
+	char Addmore = 'Y';
+	do {
+		system("cls");
+		cout << "Adding New Client:\n\n";
+		AddNewClient();
+		cout << "Client Added Successfully,do you want to add more Clients 	Y/N	 ?";
+		cin >> Addmore;
+	} while (toupper(Addmore)=='Y');
+}
+///*=====================================================*/
+/*=====================================================*/
+//48/3 Show All Clients
+
 int main()
 {
-	//srand((unsigned)time(NULL));
-	//vector<string> vString = { "Mohammed","Faid","Ali","Maher" };
-	//string arrString[] = { "Mohammed","Faid","Ali","Maher" };
-	string S = "Welcome to syria , syria is a nice country";
-	string SToReplace = "syria";
-	string ReplaceTo = "Jordan";
-	cout << S << endl;
-	cout << "After Change :" << endl;
-	cout << ReplaceWordStringUsingBuildInFunction(S,SToReplace,ReplaceTo) << endl;
-
-	
-
+	//srand((unsigned)time(NULL));	
+	AddMoreClients();
 	system("pause>0");
 }
