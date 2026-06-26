@@ -13,10 +13,34 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Course5">
+      <UniqueIdentifier>{12666653-080f-46ff-9d9f-3f923de0d775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Course6">
+      <UniqueIdentifier>{83237869-124c-43e3-b45b-3534162fec42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Corse7">
+      <UniqueIdentifier>{22ca2920-8dfc-49d6-97c3-a42741e7e43d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ProblemSolving_level2.cpp">
+      <Filter>Source Files\Course5</Filter>
+    </ClCompile>
+    <ClCompile Include="C6.cpp">
+      <Filter>Source Files\Course6</Filter>
+    </ClCompile>
+    <ClCompile Include="project1%28Stone&amp;Paper&amp;Scissors%29.cpp">
+      <Filter>Source Files\Course5</Filter>
+    </ClCompile>
+    <ClCompile Include="project2%28MathGame%29.cpp">
+      <Filter>Source Files\Course5</Filter>
+    </ClCompile>
     <ClCompile Include="Course 7.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Corse7</Filter>
+    </ClCompile>
+    <ClCompile Include="project1%28Bank%29.cpp">
+      <Filter>Source Files\Corse7</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
